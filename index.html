@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Todo App</title>
-    <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <!-- TODO: Initialize our app -->
@@ -70,44 +70,43 @@
         <!-- TODO: Hide/show magic once more -->
         <div class="col-xs-12">
           <h1>New Todo</h1>
-          <form>
-            <div class="form-group">
-              <label>Task Description</label>
-              <!-- TODO: Hook up this form to our JS for submitting -->
-              <input type="text" class="form-control" placeholder="Some important task" />
-            </div>
-            <div class="form-group">
-              <label>Due Date</label>
-              <input type="text" class="form-control" placeholder="01/12/17" />
-            </div>
-            <div class="form-group">
-              <label>Assigned To</label>
-              <input type="text" class="form-control" placeholder="cohort 15" />
-            </div>
-            <div class="form-group">
-              <label>Location</label>
-              <input type="text" class="form-control" placeholder="attic" />
-            </div>
-            <div class="form-group">
-              <label>Urgency</label>
-              <input type="text" class="form-control" placeholder="low" />
-            </div>
-            <div class="form-group">
-              <label>Dependencies</label>
-              <input type="text" class="form-control" placeholder="brush chipper, monkey chow, the one ring" />
-            </div>
-            <!-- TODO: bind this button to a function -->
-            <button class="btn btn-default">Submit</button>
-          </form>
+          <div class="form-group">
+            <label>Task Description</label>
+            <!-- TODO: Hook up this form to our JS for submitting -->
+            <input type="text" class="form-control" placeholder="Some important task" />
+          </div>
+          <div class="form-group">
+            <label>Due Date</label>
+            <input type="text" class="form-control" placeholder="12/12/17" />
+          </div>
+          <div class="form-group">
+            <label>Assigned To</label>
+            <input type="text" class="form-control" placeholder="cohort 20" />
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" placeholder="attic" />
+          </div>
+          <div class="form-group">
+            <label>Urgency</label>
+            <input type="text" class="form-control" placeholder="low" />
+          </div>
+          <div class="form-group">
+            <label>Dependencies</label>
+            <input type="text" class="form-control" placeholder="brush chipper, monkey chow, the one ring" />
+          </div>
+          <!-- TODO: bind this button to a function -->
+          <button class="btn btn-default">Submit</button>
         </div>
       </div>
     </div>
   </div>
 
-<script type="text/javascript" src="lib/bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js">
-</script>
-<script type="text/javascript" src="lib/bower_components/angular/angular.min.js"></script>
-<script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="lib/node_modules/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="lib/node_modules/bootstrap/dist/js/bootstrap.min.js">
+  </script>
+  <script type="text/javascript" src="lib/node_modules/angular/angular.min.js"></script>
+  <script type="text/javascript" src="lib/node_modules/angular-route/angular-route.min.js"></script>
+  <script type="text/javascript" src="app/app.js"></script>
 </body>
 </html>
