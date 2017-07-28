@@ -2,50 +2,31 @@
 <html>
 <head>
     <title>Todo App</title>
+     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="lib/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
-<!-- TODO: Initialize our app -->
 <body ng-app="TodoApp">
-  <!-- TODO: Add a nav controller -->
-  <nav class="navbar navbar-default" ng-controller="UserController">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <button type="" ng-click="logout()">logout</button>
-        <a class="navbar-brand" href="#">Todo App</a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <!-- TODO: Use Angular to loop through nav items -->
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"></a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
 
-  <!-- TODO: Add a controller for our todo list -->
-  <div>
-    <div class="row">
-      <div class="col-xs-6 col-xs-offset-3">
-        <!-- Let's call a js function from our HTML. wat? -->
-        <button class="col-xs-6 btn btn-success">New Item</button>
-        <button class="col-xs-6 btn btn-info"> All Items</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-1 main-container">
-        <!-- TODO: Add boolean for hide/show -->
+  <!-- Implemented by Joe since Thursday's class:
+  -Fixed problem with tasks not loading after logging in
+  -Moved 'new item' and 'all item' links to navbar
+  -Those links now hide when use not logged in
+  -login / logout links show/hide based on user state
+  -Search and delete in ui now have icons
+  -Implemented filter functionality in search input (warning: brain melting ahead)
+  -Item detail page loads when you click a todo task's name
+  -Display the task in a form so the user can edit a task
+  -Save the edited task to FB and reload the todo list after it's updated -->
 
-        <!-- TODO: Hide/show magic once more -->
-        <div ng-view></div>
-      </div>
+
+  <!-- Remember to put the path in single quotes when using ng-include -->
+  <div ng-include="'partials/navbar.html'">
+
+  </div>
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1 main-container">
+      <div ng-view></div>
     </div>
   </div>
 
