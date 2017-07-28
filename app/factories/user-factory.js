@@ -11,15 +11,22 @@ todoApp.factory("UserFactory", function($q, $http, FirebaseUrl, FBCreds) {
 
   let currentUser = null;
 
-  firebase.auth().onAuthStateChanged( (user) => {
-    if(user) {
-      console.log("user", user);
-      currentUser = user.uid;
-    } else {
-      console.log("logged out");
-      currentUser = null;
-    }
-  });
+  let isAuthenticated = function() {
+    console.log("isAuthenticated called");
+    return new Promise( (resolve, reject) => {
+      console.log("firing onAuthStateChanged");
+      firebase.auth().onAuthStateChanged(function(user) {
+        console.log("onAuthStateChanged finished");
+        if (user) {
+          console.log("user", user);
+          currentUser = user.uid;
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      });
+    });
+  };
 
   let getUser = () => {
     return currentUser;
@@ -33,9 +40,18 @@ todoApp.factory("UserFactory", function($q, $http, FirebaseUrl, FBCreds) {
   };
 
   let loginUser = (userObj) => {
-    return firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
-    .catch( (err) => {
-      console.log("error loggin in", err.message);
+    return $q( (resolve, reject) => {
+      firebase.auth().signInWithEmailAndPassword(userObj.email, userObj.password)
+      .then( (user) => {
+        // have to set the current user here because the controllers that call `getUser`
+        // ( todo-controller, for example) are loading before the `onAuthStateChanged`
+        // listener was kicking in and setting the user value
+        currentUser = user.uid;
+        resolve(user);
+      })
+      .catch( (err) => {
+        console.log("error loggin in", err.message);
+      });
     });
   };
 
@@ -48,5 +64,5 @@ todoApp.factory("UserFactory", function($q, $http, FirebaseUrl, FBCreds) {
 
   console.log("firebase", firebase );
 
-  return {getUser, createUser, loginUser, logoutUser};
+  return {isAuthenticated, getUser, createUser, loginUser, logoutUser};
 });
