@@ -25,9 +25,10 @@ todoApp.controller("UserController", function($scope, $window, UserFactory) {
     });
   };
 
-  $scope.logout = () => {
-    console.log("logout clicked");
-    UserFactory.logoutUser();
-  };
+  // Moved to nav ctrl
+  // $scope.logout = () => {
+  //   console.log("logout clicked");
+  //   UserFactory.logoutUser();
+  // };
 
 });
