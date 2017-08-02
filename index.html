@@ -21,14 +21,28 @@
 
 
   <!-- Remember to put the path in single quotes when using ng-include -->
-  <div ng-include="'partials/navbar.html'">
+  <!-- <div ng-include="'partials/navbar.html'"></div> -->
+
+  <div ng-controller="gardenCtrl">
+    <h3>Here is where you can make a new garden</h3>
+    <canvas id="graphCanvas" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)" height=300 width=300 style="border:1px solid #000000;"></canvas>
+
+    <img id="img1" src="http://static.tumblr.com/vcbmwcj/foumiteqs/arrow_up_alt1.svg" draggable="true" ng-mousedown="getPos($event)" ondragstart="angular.element(this).scope().drag(event)"/>
+
+    <button ng-click="saveGarden()">Save Garden</button>
+
+    <h3>Here is where you can print your saved garden</h3>
+    <canvas id="graphCanvas2" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)" height=300 width=300 style="border:1px solid #000000;">
+    </canvas>
+    <button ng-click="getGarden()">Get My Saved Garden</button>
 
   </div>
+<!--
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 main-container">
       <div ng-view></div>
     </div>
-  </div>
+  </div> -->
 
   <!-- third-party scripts -->
   <script type="text/javascript" src="lib/node_modules/jquery/dist/jquery.min.js"></script>

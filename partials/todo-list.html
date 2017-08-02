@@ -1,7 +1,7 @@
+<!-- <div ng-include="'partials/navbar.html'"></div> -->
 <div class="col-xs-12">
   <h1>Todo List</h1>
   <div class="row">
-
    <!--  Moved the search to the navbar. But also added "filter" functionality. But wait...How does this template know what's happening in a whole other template/controller binding?
    This one is tough-->
 
@@ -12,7 +12,7 @@
          ng-repeat="todo in todos | filter: {task: searchText.searchTerm}">
       <div class="panel-body">
         <div class="col-xs-1"><input type="checkbox" ng-model="todo.isCompleted" ng-change="updateTaskStatus(todo)"></div>
-        <div class="col-xs-7 task"><a href="#!/todos/detail/{{todo.id}}">{{todo.task}}</a></div>
+        <div class="col-xs-7 task"><a ng-href="#!/todos/detail/{{todo.id}}">{{todo.task}}</a></div>
         <div class="col-xs-2 date">{{todo.dueDate}}</div>
         <div class="col-xs-1 assigned-to">{{todo.assignedTo}}</div>
         <div class="col-xs-1 delete"><button class="btn btn-danger" ng-click="deleteTask(todo.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
