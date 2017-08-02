@@ -24,10 +24,12 @@
   <!-- <div ng-include="'partials/navbar.html'"></div> -->
 
   <div ng-controller="gardenCtrl">
+    <!-- Any elements before the canvas are making it drop in weird places. Why? -->
     <h3>Here is where you can make a new garden</h3>
     <canvas id="graphCanvas" ondrop="angular.element(this).scope().drop(event)" ondragover="angular.element(this).scope().allowDrop(event)" height=300 width=300 style="border:1px solid #000000;"></canvas>
 
-    <img id="img1" src="http://static.tumblr.com/vcbmwcj/foumiteqs/arrow_up_alt1.svg" draggable="true" ng-mousedown="getPos($event)" ondragstart="angular.element(this).scope().drag(event)"/>
+    <img id="tomato" src="tomato.png" draggable="true" ng-mousedown="getPos($event)"ondragstart="angular.element(this).scope().drag(event)"/>
+    <img id="cucumber" src="cucumber.png" draggable="true" ng-mousedown="getPos($event)"ondragstart="angular.element(this).scope().drag(event)"/>
 
     <button ng-click="saveGarden()">Save Garden</button>
 
