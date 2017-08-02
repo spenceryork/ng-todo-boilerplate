@@ -3,11 +3,9 @@
 let todoApp = angular.module("TodoApp", ["ngRoute"])
 .constant("FirebaseUrl", "https://d20-ng-todo.firebaseio.com/");
 
-todoApp.controller('gardenCtrl', function($scope, $http, FirebaseUrl){
-  // let canvas = document.getElementById("graphCanvas");
-  // let canvas = document.createElement("canvas");
-  // Getting jshint warning about leaking var (canvas) here
-
+todoApp.controller('gardenCtrl', function($scope, $http, FirebaseUrl) {
+  // This controller and the related HTML in index.html
+  // are based on this mess: http://jsfiddle.net/YXxsH/5/
   let position;
   let counter = 0;
   let garden = {};
@@ -17,7 +15,7 @@ todoApp.controller('gardenCtrl', function($scope, $http, FirebaseUrl){
   };
 
   $scope.getPos = (ev) => {
-      console.log("ev", ev);
+      console.log("ev", ev); //the event, which has the target's (the image itself's) x,y coords as properties
       position = [ev.pageX, ev.pageY];
   };
 
@@ -32,14 +30,17 @@ todoApp.controller('gardenCtrl', function($scope, $http, FirebaseUrl){
       // Basically is grabbing the id string of the image
       let data = ev.dataTransfer.getData("Text");
       console.log("data?", data);
-      let img = document.getElementById(data);
-      console.log("img", img);
+      let $img = $(`#${data}`);
+      console.log("img", $img);
       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetLeft
-      let dx = position[0] - img.offsetLeft;
-      let dy = position[1] - img.offsetTop;
-      document.getElementById("graphCanvas").getContext("2d").drawImage(img, ev.pageX - dx, ev.pageY - dy);
-      console.log("New position?", ev.pageX, ev.pageY);
-      garden[`plant${counter}`] = {xCoord: ev.pageX, yCoord: ev.pageY, imgName: img.id};
+      // http://api.jquery.com/offset/
+      let adjustedX = position[0] - $img.offset().left + $("#graphCanvas").offset().left;
+      let adjustedY = position[1] - $img.offset().top + $("#graphCanvas").offset().top;
+      $("#graphCanvas")[0].getContext("2d").drawImage($img[0],
+        ev.pageX - adjustedX,
+        ev.pageY - adjustedY
+      );
+      garden[`plant${counter}`] = {xCoord: ev.pageX - adjustedX, yCoord: ev.pageY - adjustedY, imgName: $img.attr("id")};
   };
 
   $scope.saveGarden = () => {
@@ -65,14 +66,14 @@ todoApp.controller('gardenCtrl', function($scope, $http, FirebaseUrl){
     // We saved nested data (gasp!), so this is how to mine down into it to get the
     // object of objects we need
     let gardenObjects = garden[Object.keys(garden)[0]];
-    let canvas = document.getElementById("graphCanvas2");
+    let canvas = $("#graphCanvas2")[0];
     for( let plant in gardenObjects ) {
       let imgName = gardenObjects[plant].imgName;
       console.log("img", imgName);
-      let img = document.getElementById(imgName);
-      console.log("img???", img);
+      let $img = $(`#${imgName}`);
+      console.log("img???", $img[0]);
       canvas
-      .getContext("2d").drawImage(img, gardenObjects[plant].xCoord, gardenObjects[plant].yCoord);
+      .getContext("2d").drawImage($img[0], gardenObjects[plant].xCoord, gardenObjects[plant].yCoord);
     }
   }
 
