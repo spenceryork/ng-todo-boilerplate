@@ -4,6 +4,16 @@ angular.module("TodoApp").controller("ItemListCtrl", function($scope, ItemFactor
 
     $scope.searchTerm = FilterFactory;
 
-    $scope.items = ItemFactory.getTodoItems();
+    $scope.deleteTodoItems = (id) => {
+        ItemFactory.deleteTodoItems(id);
+    };
+
+    ItemFactory.getTodoItems()
+    .then( (itemsData) => {
+        console.log("itemsData", itemsData);
+
+        $scope.items = itemsData;
+    });
+    // $scope.items = ItemFactory.getTodoItems();
 
 });
